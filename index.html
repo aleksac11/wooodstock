@@ -98,7 +98,7 @@ nav.links a:hover{color:var(--brass)}
 .hero-photo{position:relative;min-width:0}
 .hero-photo{justify-self:end;width:fit-content;max-width:100%;margin:0;align-self:start}
 .hero-photo{perspective:900px;cursor:default}
-.hero-photo img{width:auto;max-width:100%;height:auto;object-fit:contain;object-position:center bottom;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translate3d(var(--tx,0px),var(--ty,0px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .6s ease;filter:drop-shadow(0 22px 26px rgba(0,0,0,.55)) drop-shadow(0 0 0 rgba(201,160,99,0));will-change:transform}
+.hero-photo img{width:auto;max-width:100%;height:auto;aspect-ratio:703/933;object-fit:fill;object-position:center bottom;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translate3d(var(--tx,0px),var(--ty,0px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .6s ease;filter:drop-shadow(0 22px 26px rgba(0,0,0,.55)) drop-shadow(0 0 0 rgba(201,160,99,0));will-change:transform}
 .hero-photo:hover img{transition:transform .18s ease-out,filter .6s ease;filter:drop-shadow(0 30px 34px rgba(0,0,0,.6)) drop-shadow(0 0 28px rgba(201,160,99,.18))}
 .hp-stage{position:relative;display:flex;justify-content:center}
 .hp-stage::after{content:"";position:absolute;left:12%;right:12%;bottom:-6px;height:22px;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);z-index:-1;transition:transform .6s ease,opacity .6s ease}
@@ -350,7 +350,7 @@ footer{border-top:1px solid var(--walnut-700);padding-block:40px}
           </div>
         </article>
         <article class="model">
-          <figure><img src="modern.jpg" alt="Woodstock Modern točilica sa cilindričnom slavinom od nerđajućeg čelika" loading="lazy" width="684" height="1145"></figure>
+          <figure><img src="modern-wide.jpg" alt="Woodstock Modern točilica sa cilindričnom slavinom od nerđajućeg čelika" loading="lazy" width="684" height="1145"></figure>
           <div class="model-body">
             <div class="model-top">
               <h3>Woodstock <i>Modern</i></h3>
@@ -426,7 +426,7 @@ footer{border-top:1px solid var(--walnut-700);padding-block:40px}
           <li><span class="n">I</span><div><h3 data-i18n="st1t">Izbor drveta</h3><p data-i18n="st1p">Radimo od parene bukve, čvrstog i stabilnog drveta ujednačene boje, bez čvorova i pukotina.</p></div></li>
           <li><span class="n">II</span><div><h3 data-i18n="st2t">Ram i postolje</h3><p data-i18n="st2p">Ram se seče pod uglom i spaja ručno, pa se brusi dok spojevi ne postanu nevidljivi.</p></div></li>
           <li><span class="n">III</span><div><h3 data-i18n="st3t">Staklo i slavina</h3><p data-i18n="st3p">Ugrađujemo staklenu posudu i slavinu, pa svaku točilicu probamo vodom da ne kaplje.</p></div></li>
-          <li><span class="n">IV</span><div><h3 data-i18n="st4t">Boja i zaštita</h3><p data-i18n="st4p">Drvo bojimo u tonu prirodne bukve, mahagonija ili oraha, pa ga štitimo od vlage i mrlja.</p></div></li>
+          <li><span class="n">IV</span><div><h3 data-i18n="st4t">Boja i zaštita</h3><p data-i18n="st4p">Premazujemo prirodnim bojama koje prodiru duboko u pore drveta, štiteći ga od vlage, a istovremeno čuvaju njegov prirodni izgled.</p></div></li>
         </ol>
       </div>
     </div>
@@ -588,7 +588,7 @@ footer{border-top:1px solid var(--walnut-700);padding-block:40px}
       st1t:"Choosing the wood",st1p:"We work in steamed beech, a strong, stable wood with an even colour and no knots or cracks.",
       st2t:"Frame and stand",st2p:"The frame is mitred and joined by hand, then sanded until the joints disappear.",
       st3t:"Glass and tap",st3p:"We fit the glass vessel and tap, then test every dispenser with water so it never drips.",
-      st4t:"Colour and finish",st4p:"We stain the wood in natural beech, mahogany or walnut, then protect it from moisture and stains.",
+      st4t:"Colour and finish",st4p:"We coat it with natural stains that soak deep into the pores of the wood, protecting it from moisture while preserving its natural look.",
       cusEyebrow:"Made to order",cusTitle:"Your dispenser, your signature",cusLead:"Tell us who it's for and where it will stand. We choose the wood, tap and engraving together, and you get a sketch and an exact price before we start.",
       o1t:"Wood colour",o1p:"Steamed beech in three tones: natural beech, mahogany or walnut.",w1:"Natural beech",w2:"Mahogany",w3:"Walnut",
       o2t:"Engraving",o2p:"Names, a date, a family crest or a company logo, laser engraved on the frame or stand.",
@@ -716,7 +716,7 @@ footer{border-top:1px solid var(--walnut-700);padding-block:40px}
   function fitHero(){
     if(document.querySelector(".site").clientWidth<=860){ heroImg.style.height=""; heroCap.style.marginTop=""; return; }
     const h=facts.getBoundingClientRect().top-eyebrow.getBoundingClientRect().top;
-    const colW=heroFig0.parentElement.clientWidth*0.45; const ih=Math.max(200,Math.round(Math.min(h*0.93, colW*933/663))); heroImg.style.height=ih+"px"; heroCap.style.marginTop=Math.max(20,Math.round(h-ih))+"px";
+    const colW=heroFig0.parentElement.clientWidth*0.45; let ih=Math.max(200,Math.round(Math.min(h*0.93, colW*933/703))); heroImg.style.height=ih+"px"; const maxW=heroFig0.clientWidth||heroImg.getBoundingClientRect().width; if(heroImg.getBoundingClientRect().width<ih*703/933-1){ ih=Math.round(heroImg.getBoundingClientRect().width*933/703); heroImg.style.height=ih+"px"; } heroCap.style.marginTop=Math.max(20,Math.round(h-ih))+"px";
   }
   fitHero();
   addEventListener("resize",fitHero);
